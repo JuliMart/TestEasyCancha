@@ -1589,5 +1589,141 @@ public class Steps {
         }
     }
 
+    @When("elegir comunas {string}")
+    public void elegir_comunas(String comunaXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar a que el elemento que represente la comuna esté clicable
+            WebElement comunaElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(comunaXPath)));
+            comunaElement.click(); // Hacer clic en el elemento de la comuna
+            
+            System.out.println("Se eligió la comuna con XPath: " + comunaXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el elemento de la comuna con XPath: " + comunaXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
 
+    @Then("elegir actividad {string}")
+    public void elegir_actividad(String actividadXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar a que el elemento de actividad sea clicable
+            WebElement actividadElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(actividadXPath)));
+            actividadElement.click(); // Hacer clic en el elemento de la actividad
+            
+            System.out.println("Se eligió la actividad con XPath: " + actividadXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el elemento de la actividad con XPath: " + actividadXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @And("desplegar {string}")
+    public void desplegar(String opcionXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar a que el elemento del desplegable sea clicable
+            WebElement opcionElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(opcionXPath)));
+            opcionElement.click(); // Hacer clic en la opción del desplegable
+            
+            System.out.println("Se seleccionó la opción del desplegable con XPath: " + opcionXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en la opción del desplegable con XPath: " + opcionXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @Then("aplicar filtros {string}")
+    public void aplicar_filtros(String botonFiltrosXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar a que el botón de aplicar filtros sea clicable
+            WebElement botonFiltros = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(botonFiltrosXPath)));
+            botonFiltros.click(); // Hacer clic en el botón de aplicar filtros
+            
+            System.out.println("Se hizo clic en el botón de aplicar filtros con XPath: " + botonFiltrosXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el botón de aplicar filtros con XPath: " + botonFiltrosXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @Then("editar datos personales {string}")
+    public void editar_datos_personales(String editarDatosXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar hasta que el overlay de carga desaparezca
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'loadingOverlay')]")));
+
+            // Esperar a que el elemento de editar datos personales sea clicable
+            WebElement editarDatosElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(editarDatosXPath)));
+            editarDatosElement.click(); // Hacer clic en el enlace para editar datos personales
+
+            System.out.println("Se hizo clic en el enlace para editar datos personales con XPath: " + editarDatosXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el enlace de editar datos personales con XPath: " + editarDatosXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace de editar datos personales con XPath: " + editarDatosXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @And("descartar prime {string}")
+    public void descartar_prime(String descartarPrimeXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar a que el elemento de descartar prime sea clicable
+            WebElement descartarPrimeElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(descartarPrimeXPath)));
+            descartarPrimeElement.click(); // Hacer clic en el enlace para descartar prime
+            
+            System.out.println("Se hizo clic en el enlace para descartar prime con XPath: " + descartarPrimeXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el enlace para descartar prime con XPath: " + descartarPrimeXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @Then("ver lista amigos {string}")
+    public void ver_lista_amigos(String verListaAmigosXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar hasta que el overlay de carga desaparezca
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'loadingOverlay')]")));
+
+            // Esperar a que el elemento de editar datos personales sea clicable
+            WebElement editarDatosElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(verListaAmigosXPath)));
+            editarDatosElement.click(); // Hacer clic en el enlace para editar datos personales
+
+            System.out.println("Se hizo clic en el enlace para editar datos personales con XPath: " + verListaAmigosXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el enlace de editar datos personales con XPath: " + verListaAmigosXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace de editar datos personales con XPath: " + verListaAmigosXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @Then("btn tarjetas {string}")
+    public void btn_tarjetas(String btnTarjetasXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar hasta que el overlay de carga desaparezca (si existe)
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'loadingOverlay')]")));
+
+            // Esperar a que el botón de tarjetas sea clicable
+            WebElement btnTarjetasElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(btnTarjetasXPath)));
+
+            // Desplazarse al elemento antes de hacer clic (opcional si está oculto o fuera de vista)
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", btnTarjetasElement);
+
+            // Hacer clic en el botón de tarjetas
+            btnTarjetasElement.click();
+
+            System.out.println("Se hizo clic en el botón de tarjetas con XPath: " + btnTarjetasXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el botón de tarjetas con XPath: " + btnTarjetasXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el botón de tarjetas con XPath: " + btnTarjetasXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
 }
