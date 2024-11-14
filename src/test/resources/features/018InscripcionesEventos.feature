@@ -9,6 +9,8 @@ Feature: Reservas
     Then presenta el mensaje de bienvenida "//div[contains(@class, 'user_welcome')]"
 	
 @tag2
-    Scenario: Ver reserva activa
+    Scenario: Ver inscripciones 
     	    Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"	
-  				When presiona el btnFooter "//*[@id='main-footer']/div/a[2]/span"
+  				And presiona el btnFooter "//*[@id='main-footer']/div/a[2]/span"
+  				Then presiona ver inscripciones '//*[@id="scrollContainer"]/main/section[2]/div/div[2]/button'
+  				

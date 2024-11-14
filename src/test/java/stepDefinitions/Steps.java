@@ -2127,5 +2127,245 @@ public class Steps {
         String obj = "selecciona lista espera"; // Nombre de la foto
         Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
     }
+    @Then("selecciona ver convenios {string}")
+    public void selecciona_ver_convenios(String verConveniosXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement verConveniosElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(verConveniosXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", verConveniosElement);
+
+                // Esperar a que el elemento sea clicable
+                wait.until(ExpectedConditions.elementToBeClickable(verConveniosElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'selecciona ver convenios' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar seleccionar ver convenios: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en 'selecciona ver convenios' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "selecciona ver convenios"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @Then("selecciona mis cupones {string}")
+    public void selecciona_mis_cupones(String misCuponesXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement misCuponesElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(misCuponesXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", misCuponesElement);
+
+                // Esperar a que el elemento sea clicable
+                wait.until(ExpectedConditions.elementToBeClickable(misCuponesElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'selecciona mis cupones' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar seleccionar mis cupones: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en 'selecciona mis cupones' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "selecciona mis cupones"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @Then("selecciona preguntas frecuentes {string}")
+    public void selecciona_preguntas_frecuentes(String preguntasFrecuentesXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement preguntasFrecuentesElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(preguntasFrecuentesXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", preguntasFrecuentesElement);
+
+                // Esperar a que el elemento sea clicable y hacer clic
+                wait.until(ExpectedConditions.elementToBeClickable(preguntasFrecuentesElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'selecciona preguntas frecuentes' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar seleccionar preguntas frecuentes: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en 'selecciona preguntas frecuentes' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "selecciona preguntas frecuentes"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @Then("selecciona cerrar sesion {string}")
+    public void selecciona_cerrar_sesion(String cerrarSesionXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement cerrarSesionElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cerrarSesionXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", cerrarSesionElement);
+
+                // Esperar a que el elemento sea clicable y hacer clic
+                wait.until(ExpectedConditions.elementToBeClickable(cerrarSesionElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'selecciona cerrar sesion' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar seleccionar cerrar sesión: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en 'selecciona cerrar sesion' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "selecciona cerrar sesion"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @Then("presiona ver inscripciones {string}")
+    public void presiona_ver_inscripciones(String verInscripcionesXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement verInscripcionesElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(verInscripcionesXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", verInscripcionesElement);
+
+                // Esperar a que el elemento sea clicable y hacer clic
+                wait.until(ExpectedConditions.elementToBeClickable(verInscripcionesElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'presiona ver inscripciones' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar presionar ver inscripciones: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en 'presiona ver inscripciones' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "presiona ver inscripciones"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
 
 }
