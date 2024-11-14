@@ -49,44 +49,59 @@ public class Steps {
     }
 
     @Given("al navegar hasta la url {string}")
-    public void al_navegar_hasta_la_url(String url) {
+    public void al_navegar_hasta_la_url(String url) throws IOException {
         driver.get(url); // Navegar a la URL dada
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='book-views']"))); // Esperar a que un elemento sea visible
+    
+    String obj = "al navegar hasta la url"; //nombre de la foto 
+    Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
     }
-
+    
     @And("hacer click en el botón {string}")
-    public void hacer_click_en_el_boton(String botonXPath) {
+    public void hacer_click_en_el_boton(String botonXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(botonXPath))); // Esperar a que el botón sea clicable
         boton.click(); // Hacer clic en el botón
+        
+        String obj = "hacer click en el botón"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+     
     }
 
     @When("coloca en el campo usuario {string} el texto {string}")
-    public void coloca_en_el_campo_usuario_el_texto(String usuarioXPath, String texto) {
+    public void coloca_en_el_campo_usuario_el_texto(String usuarioXPath, String texto) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement inputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(usuarioXPath))); // Esperar el campo de usuario
         inputField.clear(); // Limpiar el campo
         inputField.sendKeys(texto); // Ingresar texto
+        String obj = "hacer click en el botón"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
     }
 
     @When("coloca en el campo password {string} el texto {string}")
-    public void coloca_en_el_campo_password_el_texto(String passwordXPath, String texto) {
+    public void coloca_en_el_campo_password_el_texto(String passwordXPath, String texto) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement inputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(passwordXPath))); // Esperar el campo de contraseña
         inputField.clear(); // Limpiar el campo
         inputField.sendKeys(texto); // Ingresar texto
+        String obj = "coloca en el campo password el texto"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+   
     }
 
     @And("hace click en el boton {string}")
-    public void hace_click_en_el_boton(String botonXPath) {
+    public void hace_click_en_el_boton(String botonXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(botonXPath))); // Esperar que el botón sea clicable
         boton.click(); // Hacer clic en el botón
+        String obj = "hace click en el boton"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+   
     }
 
     @Then("presenta el mensaje de bienvenida {string}")
-    public void presenta_el_mensaje_de_bienvenida(String mensajeXPath) {
+    public void presenta_el_mensaje_de_bienvenida(String mensajeXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement mensaje = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(mensajeXPath))); // Esperar el mensaje de bienvenida
         String textoBienvenida = mensaje.getText(); // Obtener el texto del mensaje
@@ -96,10 +111,13 @@ public class Steps {
         } else {
             System.out.println("No se encontró el mensaje de bienvenida esperado."); // Mensaje de error
         }
+        String obj = "presenta el mensaje de bienvenida"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+  
     }
 
     @Then("presenta el mensaje de error {string}")
-    public void presenta_el_mensaje_de_error(String mensajeXPath) {
+    public void presenta_el_mensaje_de_error(String mensajeXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement mensajeError = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(mensajeXPath))); // Esperar el mensaje de error
         String textoError = mensajeError.getText(); // Obtener el texto del mensaje
@@ -109,6 +127,9 @@ public class Steps {
         } else {
             System.out.println("No se encontró el mensaje de error esperado."); // Mensaje de error
         }
+        String obj = "presenta el mensaje de error"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+  
     }
 
     
@@ -1726,4 +1747,385 @@ public class Steps {
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
     }
+    @Then("seleccionar pais {string}")
+    public void seleccionar_pais(String seleccionarPaisXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar hasta que el overlay de carga desaparezca (si existe)
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'loadingOverlay')]")));
+
+            // Esperar a que el elemento "Seleccionar País" sea clicable
+            WebElement seleccionarPaisElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(seleccionarPaisXPath)));
+
+            // Desplazarse al elemento antes de hacer clic (opcional si está oculto o fuera de vista)
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", seleccionarPaisElement);
+
+            // Hacer clic en el elemento "Seleccionar País"
+            seleccionarPaisElement.click();
+
+            System.out.println("Se hizo clic en el enlace para seleccionar país con XPath: " + seleccionarPaisXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el enlace para seleccionar país con XPath: " + seleccionarPaisXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace para seleccionar país con XPath: " + seleccionarPaisXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @Then("elegir pais para utilizar la app {string}")
+    public void elegir_pais_para_utilizar_la_app(String elegirPaisXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar hasta que el overlay de carga desaparezca (si existe)
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'loadingOverlay')]")));
+
+            // Esperar a que el elemento "Elegir País para utilizar la app" sea clicable
+            WebElement elegirPaisElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(elegirPaisXPath)));
+
+            // Desplazarse al elemento antes de hacer clic (opcional si está oculto o fuera de vista)
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", elegirPaisElement);
+
+            // Hacer clic en el elemento "Elegir País para utilizar la app"
+            elegirPaisElement.click();
+
+            System.out.println("Se hizo clic en el enlace para elegir país para utilizar la app con XPath: " + elegirPaisXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el enlace para elegir país con XPath: " + elegirPaisXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace para elegir país con XPath: " + elegirPaisXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @And("seleccionar idioma {string}")
+    public void seleccionar_idioma(String seleccionarIdiomaXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar hasta que el overlay de carga desaparezca (si existe)
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'loadingOverlay')]")));
+
+            // Esperar a que el elemento "Seleccionar Idioma" sea clicable
+            WebElement seleccionarIdiomaElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(seleccionarIdiomaXPath)));
+
+            // Desplazarse al elemento antes de hacer clic (opcional si está oculto o fuera de vista)
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", seleccionarIdiomaElement);
+
+            // Hacer clic en el elemento "Seleccionar Idioma"
+            seleccionarIdiomaElement.click();
+
+            System.out.println("Se hizo clic en el enlace para seleccionar idioma con XPath: " + seleccionarIdiomaXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el enlace para seleccionar idioma con XPath: " + seleccionarIdiomaXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace para seleccionar idioma con XPath: " + seleccionarIdiomaXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @Then("seleccionar ingles {string}")
+    public void seleccionar_ingles(String seleccionarInglesXPath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        try {
+            // Esperar hasta que el overlay de carga desaparezca (si existe)
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'loadingOverlay')]")));
+
+            // Esperar a que el elemento "Seleccionar Inglés" sea clicable
+            WebElement seleccionarInglesElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(seleccionarInglesXPath)));
+
+            // Desplazarse al elemento antes de hacer clic (opcional si está oculto o fuera de vista)
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", seleccionarInglesElement);
+
+            // Hacer clic en el elemento "Seleccionar Inglés"
+            seleccionarInglesElement.click();
+
+            System.out.println("Se hizo clic en el enlace para seleccionar inglés con XPath: " + seleccionarInglesXPath);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            System.err.println("TimeoutException: No se pudo hacer clic en el enlace para seleccionar inglés con XPath: " + seleccionarInglesXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        } catch (org.openqa.selenium.ElementClickInterceptedException e) {
+            System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace para seleccionar inglés con XPath: " + seleccionarInglesXPath);
+            throw e; // Lanzar la excepción para manejar el fallo adecuadamente
+        }
+    }
+    @And("seleccionar cambiar contrasena {string}")
+    public void seleccionar_cambiar_contrasena(String cambiarContrasenaXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        
+        // Intentar varias veces para asegurarse de que el elemento se puede clicar
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede por overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement cambiarContrasenaElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(cambiarContrasenaXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", cambiarContrasenaElement);
+                
+                // Esperar a que el elemento sea clicable
+                wait.until(ExpectedConditions.elementToBeClickable(cambiarContrasenaElement)).click();
+                
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'cambiar contraseña' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar hacer clic en el botón cambiar contraseña: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en el botón 'cambiar contraseña' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "seleccionar cambiar contrasena"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+
+
+    @And("nueva contrasena {string} el texto {string}")
+    public void nueva_contrasena(String newPasswordXPath, String texto) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement inputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(newPasswordXPath))); // Esperar el campo de nueva contraseña
+        inputField.clear(); // Limpiar el campo
+        inputField.sendKeys(texto); // Ingresar texto
+        
+        // Capturar evidencia
+        String obj = "nueva contrasena"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+
+    @And("repite nuevo password {string} el texto {string}")
+    public void repite_nuevo_password(String repeatPasswordXPath, String texto) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement inputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(repeatPasswordXPath))); // Esperar el campo de repetir contraseña
+        inputField.clear(); // Limpiar el campo
+        inputField.sendKeys(texto); // Ingresar texto
+        
+        // Capturar evidencia
+        String obj = "repite nuevo password"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @Then("confirma cambio password {string}")
+    public void confirma_cambio_password(String confirmarCambioPasswordXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement botonConfirmar = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(confirmarCambioPasswordXPath))); // Esperar a que el botón sea clicable
+        botonConfirmar.click(); // Hacer clic en el botón para confirmar el cambio de contraseña
+
+        // Capturar evidencia
+        String obj = "confirma cambio password"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @Then("seleccionar notificaciones {string}")
+    public void seleccionar_notificaciones(String notificacionesXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement notificacionesElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(notificacionesXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", notificacionesElement);
+
+                // Esperar a que el elemento sea clicable
+                wait.until(ExpectedConditions.elementToBeClickable(notificacionesElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'notificaciones' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar hacer clic en las notificaciones: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en el botón 'notificaciones' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "seleccionar notificaciones"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @And("preferencia notificacion {string}")
+    public void preferencia_notificacion(String preferenciaXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement preferenciaElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(preferenciaXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", preferenciaElement);
+
+                // Esperar a que el elemento sea clicable
+                wait.until(ExpectedConditions.elementToBeClickable(preferenciaElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'preferencia notificacion' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar hacer clic en la preferencia de notificación: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en 'preferencia notificacion' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "preferencia notificacion"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @Then("mover switch {string}")
+    public void mover_switch(String switchXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento del switch sea visible y desplazarse hacia él
+                WebElement switchElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(switchXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", switchElement);
+
+                // Esperar a que el elemento sea clicable
+                wait.until(ExpectedConditions.elementToBeClickable(switchElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando mover el 'switch' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar mover el switch: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en el switch después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "mover switch"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+    @Then("selecciona lista espera {string}")
+    public void selecciona_lista_espera(String listaEsperaXPath) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        int retryCount = 0;
+        boolean isClicked = false;
+
+        // Intentar hacer clic hasta 5 veces si no se puede debido a overlays u otros problemas
+        while (retryCount < 5 && !isClicked) {
+            try {
+                // Esperar a que el overlay de carga desaparezca
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay")));
+
+                // Esperar a que el elemento sea visible y desplazarse hacia él
+                WebElement listaEsperaElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(listaEsperaXPath)));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", listaEsperaElement);
+
+                // Esperar a que el elemento sea clicable
+                wait.until(ExpectedConditions.elementToBeClickable(listaEsperaElement)).click();
+
+                isClicked = true; // Si el clic es exitoso, salir del bucle
+
+            } catch (ElementClickInterceptedException | org.openqa.selenium.TimeoutException e) {
+                retryCount++;
+                System.out.println("Intentando hacer clic en 'selecciona lista espera' nuevamente. Intento: " + retryCount);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al intentar seleccionar lista de espera: " + e.getMessage());
+            }
+        }
+
+        // Si después de varios intentos no se pudo hacer clic, lanzar excepción
+        if (!isClicked) {
+            throw new RuntimeException("No se pudo hacer clic en 'selecciona lista espera' después de múltiples intentos.");
+        }
+
+        // Esperar un segundo antes de capturar la evidencia
+        try {
+            Thread.sleep(1000); // Esperar 1 segundo
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException(e);
+        }
+
+        // Capturar evidencia
+        String obj = "selecciona lista espera"; // Nombre de la foto
+        Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+    }
+
 }
