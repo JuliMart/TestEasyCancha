@@ -1,5 +1,6 @@
+
 @tag
-Feature: Reservas
+Feature: Notificaciones 
 	Background: 
     Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
     And hacer click en el botón "//div[contains(@class, 'notification_need_login')]/div[contains(@class, 'row pointer')]"
@@ -7,8 +8,10 @@ Feature: Reservas
     And coloca en el campo password "//input[@name='password' and @type='password']" el texto "Gael2901"
     And hace click en el boton "//button[contains(text(), 'Ingresar')]"
     Then presenta el mensaje de bienvenida "//div[contains(@class, 'user_welcome')]"
-	
-@tag2
-    Scenario: Ver reserva activa
-    	    Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"	
-  				When presiona el btnFooter "//*[@id='main-footer']/div/a[2]/span"
+
+@tag1	
+	Scenario: Ver cupones
+		Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
+	#	And descartar prime "/html/body/div[1]/div/div/div/div[2]/a"
+		And presionar el icono de perfil del footer "//*[@id='main-footer']/div/a[4]"
+		Then selecciona mis cupones '//*[@id="profile-views"]/main/section[3]/ul[3]/li[4]/a/span'
