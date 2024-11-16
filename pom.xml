@@ -59,6 +59,45 @@
                    <target>1.8</target>
               </configuration>
           </plugin>
-      </plugins>
-  </build>
+     
+		      
+		        <plugin>
+		            <groupId>org.apache.maven.plugins</groupId>
+		            <artifactId>maven-surefire-plugin</artifactId>
+		            <version>2.19.1</version>
+		            <configuration>
+		                <testFailureIgnore>true</testFailureIgnore>
+		            </configuration>
+		        </plugin>
+		        <plugin>
+		            <groupId>net.masterthought</groupId>
+		            <artifactId>maven-cucumber-reporting</artifactId>
+		            <version>3.20.0</version>
+		            <executions>
+		                <execution>
+		                    <id>execution</id>
+		                    <phase>verify</phase>
+		                    <goals>
+		                        <goal>generate</goal>
+		                    </goals>
+		                    <configuration>
+		                        <projectName>Transferencia</projectName>
+		                        <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
+		                        <inputDirectory>${project.build.directory}</inputDirectory>
+		                        <jsonFiles>
+		                            <param>**/*.json</param>
+		                        </jsonFiles>
+		                        <classificationDirectory>${project.build.directory}</classificationDirectory>
+		                        <classificationFiles>
+		                            <param>sample.properties</param>
+		                            <param>other.properties</param>
+		                        </classificationFiles>
+		                        <checkBuildResult>true</checkBuildResult>
+		                    </configuration>
+		                </execution>
+		            </executions>
+		        </plugin>
+		    </plugins>
+		</build>
+
 </project>
