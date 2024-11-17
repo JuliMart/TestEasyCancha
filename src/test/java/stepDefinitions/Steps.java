@@ -2559,5 +2559,192 @@ public class Steps {
         String obj = "presiona_flecha_volver"; // Nombre de la foto
         Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
     }
+    @Then("ver semana siguiente {string}")
+    public void verSemanaSiguiente(String xpath) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+            // Espera a que desaparezca la superposición de carga
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".loadingOverlay.loadingOverlayWhite")));
+
+            // Espera a que el botón sea clicable
+            WebElement botonSemanaSiguiente = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el botón
+            botonSemanaSiguiente.click();
+            System.out.println("Se ha hecho clic en el botón de 'ver semana siguiente'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'ver semana siguiente'.", e);
+        }
+    }
+    @And("click en clases y escuelas {string}")
+    public void clickEnClasesYEscuelas(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement elementoClasesYEscuelas = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el elemento
+            elementoClasesYEscuelas.click();
+            System.out.println("Se ha hecho clic en 'clases y escuelas'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el elemento 'clases y escuelas'.", e);
+        }
+    }
+    @Then("seleccionar escuela {string}")
+    public void seleccionarEscuela(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement escuela = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el elemento
+            escuela.click();
+            System.out.println("Se ha seleccionado la escuela.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el elemento 'seleccionar escuela'.", e);
+        }
+    }
+    @And("elige quiero mes gratis {string}")
+    public void eligeQuieroMesGratis(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el botón identificado por el XPath sea clicable
+            WebElement botonMesGratis = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el botón
+            botonMesGratis.click();
+            System.out.println("Se ha hecho clic en 'Quiero mes gratis'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Quiero mes gratis'.", e);
+        }
+    }
+    @Then("suscribir a prime {string}")
+    public void suscribirAPrime(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el botón identificado por el XPath sea clicable
+            WebElement botonSuscribirPrime = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el botón
+            botonSuscribirPrime.click();
+            System.out.println("Se ha hecho clic en 'Suscribir a Prime'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Suscribir a Prime'.", e);
+        }
+    }
+    @And("agregar tarjeta nueva {string}")
+    public void agregarTarjetaNueva(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement botonAgregarTarjeta = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el botón
+            botonAgregarTarjeta.click();
+            System.out.println("Se ha hecho clic en 'Agregar tarjeta nueva'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Agregar tarjeta nueva'.", e);
+        }
+    }
+
+    @When("agrega numero tarjeta {string} el texto {string}")
+    public void agregaNumeroTarjeta(String xpath, String texto) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement campoNumeroTarjeta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            campoNumeroTarjeta.clear();
+            campoNumeroTarjeta.sendKeys(texto);
+            System.out.println("Se ha ingresado el número de tarjeta: " + texto);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al ingresar el número de tarjeta.", e);
+        }
+    }
+    @And("nombre tarjeta {string} el texto {string}")
+    public void nombreTarjeta(String xpath, String texto) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement campoNombreTarjeta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            campoNombreTarjeta.clear();
+            campoNombreTarjeta.sendKeys(texto);
+            System.out.println("Se ha ingresado el nombre en la tarjeta: " + texto);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al ingresar el nombre en la tarjeta.", e);
+        }
+    }
+    @And("fecha expiracion {string} el texto {string}")
+    public void fechaExpiracion(String xpath, String texto) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement campoFechaExpiracion = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            campoFechaExpiracion.clear();
+            campoFechaExpiracion.sendKeys(texto);
+            System.out.println("Se ha ingresado la fecha de expiración: " + texto);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al ingresar la fecha de expiración.", e);
+        }
+    }
+    @And("cvv {string} el texto {string}")
+    public void cvv(String xpath, String texto) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            WebElement campoCVV = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            campoCVV.clear();
+            campoCVV.sendKeys(texto);
+            System.out.println("Se ha ingresado el CVV: " + texto);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al ingresar el CVV.", e);
+        }
+    }
+    @Then("presiona agregar tarjeta {string}")
+    public void presionaAgregarTarjeta(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el botón identificado por el XPath sea clicable
+            WebElement botonAgregarTarjeta = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el botón
+            botonAgregarTarjeta.click();
+            System.out.println("Se ha hecho clic en 'Agregar tarjeta'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Agregar tarjeta'.", e);
+        }
+    }
+    @Then("hace click en ver terminos {string}")
+    public void haceClickEnVerTerminos(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el enlace identificado por el XPath sea clicable
+            WebElement enlaceVerTerminos = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace
+            enlaceVerTerminos.click();
+            System.out.println("Se ha hecho clic en 'Ver términos'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Ver términos'.", e);
+        }
+    }
 
 }

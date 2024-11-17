@@ -4,19 +4,18 @@ Feature: Perfil Usuario
     Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
     And hacer click en el botón "//div[contains(@class, 'notification_need_login')]/div[contains(@class, 'row pointer')]"
     When coloca en el campo usuario "//input[@name='email' and @type='email']" el texto "juli.martinezm@duocuc.cl"
-    And coloca en el campo password "//input[@name='password' and @type='password']" el texto "GaelAlmendra2901"
+    And coloca en el campo password "//input[@name='password' and @type='password']" el texto "Gael2901"
     And hace click en el boton "//button[contains(text(), 'Ingresar')]"
     Then presenta el mensaje de bienvenida "//div[contains(@class, 'user_welcome')]"
-
-@tag1	
-	Scenario: Cambiar contrasena 
+	
+	Scenario: Agregar tarjeta datos incorrectos  
 		Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
 	#	And descartar prime "/html/body/div[1]/div/div/div/div[2]/a"
 		And presionar el icono de perfil del footer "//*[@id='main-footer']/div/a[4]"
-		And seleccionar cambiar contrasena "//*[@id='profile-views']/main/section[3]/ul[2]/li/a/span"
-		And coloca en el campo password "//*[@id='current_password']" el texto "GaelAlmendra2901"
-		#And coloca en el campo password "//*[@id='current_password']" el texto "Gael2901"
-		#And nueva contrasena '//*[@id="new_password"]' el texto "GaelAlmendra2901"
-		And nueva contrasena '//*[@id="new_password"]' el texto "Gael2901"
-		And repite nuevo password '//*[@id="new_repeat_password"]' el texto "Gael2901"
-		Then confirma cambio password '//*[@id="profile-views"]/div[2]/form/div[4]/div[2]/button'
+		And btn tarjetas "//*[@id='profile-views']/main/section[3]/ul[1]/li[3]/a/span"
+		And agregar tarjeta nueva '//*[@id="profile-views"]/main/section/section/div/a'
+		When agrega numero tarjeta '//*[@id="cardNumber"]' el texto "5253843986369573"
+		And nombre tarjeta '//*[@id="cardFullName"]' el texto "JULIAN MARTINEZ"
+		And fecha expiracion '//*[@id="cardExpirationDate"]' el texto "12/07"
+		And cvv '//*[@id="cardCVV"]' el texto "345"
+		Then presiona agregar tarjeta '/html/body/div[1]/div/div/div[3]/div/div/button'
