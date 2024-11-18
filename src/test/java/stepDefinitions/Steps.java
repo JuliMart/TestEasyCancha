@@ -60,14 +60,31 @@ public class Steps {
     
     @And("hacer click en el botón {string}")
     public void hacer_click_en_el_boton(String botonXPath) throws IOException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(botonXPath))); // Esperar a que el botón sea clicable
-        boton.click(); // Hacer clic en el botón
-        
-        String obj = "hacer click en el botón"; //nombre de la foto 
-        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
-     
+        try {
+            // Configura una espera explícita de hasta 30 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+            // Esperar a que el botón identificado por el XPath sea clicable
+            WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(botonXPath)));
+
+            // Esperar 2 segundos antes de hacer clic
+            Thread.sleep(2000);
+
+            // Hacer clic en el botón
+            boton.click();
+
+            // Tomar una captura de pantalla
+            String obj = "hacer click en el botón"; // Nombre de la captura
+            Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
+
+            System.out.println("Se hizo clic en el botón y se tomó una captura de pantalla.");
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Error durante la espera de 2 segundos antes de hacer clic en el botón.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón.", e);
+        }
     }
+
 
     @When("coloca en el campo usuario {string} el texto {string}")
     public void coloca_en_el_campo_usuario_el_texto(String usuarioXPath, String texto) throws IOException {
@@ -306,43 +323,26 @@ public class Steps {
         botonTenis.click(); // Hacer clic en el botón de tenis
     }
 
-    @When("selecciona club {string}")
-    public void selecciona_club(String xpathClub) {
+    @And("selecciona club {string}")
+    public void seleccionaClub(String clubXPath) {
         try {
-            // Esperar hasta que desaparezca el overlay de carga (si es visible)
-            Thread.sleep(2000); // Pequeña pausa para permitir que desaparezca el overlay de carga
+            // Configura una espera explícita de hasta 30 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-            // Encontrar el elemento del club
-            WebElement clubElement = driver.findElement(By.xpath(xpathClub));
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement botonClub = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(clubXPath)));
 
-            // Realizar scroll hacia el elemento
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clubElement);
+            // Desplázate al botón (opcional) y espera 2 segundos
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", botonClub);
+            Thread.sleep(2000); // Espera 2 segundos adicionales antes de hacer clic
 
-            // Verificar si el elemento está habilitado antes de hacer clic
-            if (clubElement.isDisplayed() && clubElement.isEnabled()) {
-                // Intentar hacer clic con Selenium
-                try {
-                    clubElement.click();
-                    System.out.println("Elemento de club clicado exitosamente: " + xpathClub);
-                } catch (ElementClickInterceptedException e) {
-                    // Si el clic es interceptado, intentar hacer clic mediante JavaScript
-                    System.out.println("Elemento interceptado, intentando con JavaScript.");
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", clubElement);
-                }
-            } else {
-                System.err.println("Elemento del club no está visible o habilitado.");
-            }
-
-        } catch (NoSuchElementException e) {
-            System.err.println("Error: No se encontró el elemento del club con el xpath: " + xpathClub);
-            throw e;
+            // Haz clic en el botón
+            botonClub.click();
+            System.out.println("Se hizo clic en el botón 'Selecciona club' después de esperar 2 segundos.");
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.err.println("Error: Interrupción durante la espera.");
-            throw new RuntimeException("Error durante la espera: " + e.getMessage());
+            throw new RuntimeException("Error durante la espera de 2 segundos antes de hacer clic en el botón 'Selecciona club'.", e);
         } catch (Exception e) {
-            System.err.println("Error inesperado al intentar seleccionar el club: " + e.getMessage());
-            throw e;
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Selecciona club'.", e);
         }
     }
 
@@ -1084,24 +1084,74 @@ public class Steps {
 
     @When("hace click en el botón editar deporte {string}")
     public void hace_click_en_el_boton_editar_deporte(String editarXPath) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
-        WebElement botonEditar = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(editarXPath))); // Esperar hasta que el botón "Editar este deporte" sea clicable
-        botonEditar.click(); // Hacer clic en el botón
+        try {
+            // Configura una espera explícita de hasta 60 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+
+            // Espera a que el botón esté presente
+            WebElement botonEditar = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(editarXPath)));
+
+            // Espera 2 segundos adicionales
+            Thread.sleep(2000);
+
+            // Forzar el clic con JavaScript
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", botonEditar);
+            System.out.println("Se hizo clic en el botón 'Editar deporte' usando JavaScript.");
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Error durante la espera antes de hacer clic en el botón 'Editar deporte'.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Editar deporte'.", e);
+        }
     }
+
 
     @When("hace click en el botón seleccionar nivel {string}")
     public void hace_click_en_el_boton_seleccionar_nivel(String nivelXPath) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
-        WebElement botonNivel = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(nivelXPath)));
-        botonNivel.click(); // Hacer clic en el botón "Seleccionar Nivel"
+        try {
+            // Configura una espera explícita de hasta 60 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+
+            // Espera hasta que el botón identificado por el XPath sea clicable
+            WebElement botonNivel = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(nivelXPath)));
+
+            // Desplázate al botón (opcional) y espera 2 segundos
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", botonNivel);
+            Thread.sleep(2000); // Esperar 2 segundos adicionales antes del clic
+
+            // Haz clic en el botón
+            botonNivel.click();
+            System.out.println("Se hizo clic en el botón 'Seleccionar nivel' después de esperar 2 segundos.");
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Error durante la espera de 2 segundos antes de hacer clic en el botón 'Seleccionar nivel'.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Seleccionar nivel'.", e);
+        }
     }
+
 
     @When("hace click en el botón seleccionar mano {string}")
     public void hace_click_en_el_boton_seleccionar_mano(String manoXPath) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
-        WebElement botonMano = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(manoXPath)));
-        botonMano.click(); // Hacer clic en el botón "Seleccionar Mano"
+        try {
+            // Configura una espera explícita de hasta 60 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+
+            // Espera hasta que el botón identificado por el XPath sea clicable
+            WebElement botonMano = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(manoXPath)));
+
+            // Desplázate al botón (opcional) y espera 2 segundos
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", botonMano);
+            Thread.sleep(2000); // Esperar 2 segundos adicionales antes del clic
+
+            // Haz clic en el botón
+            botonMano.click();
+            System.out.println("Se hizo clic en el botón 'Seleccionar mano' después de esperar 2 segundos.");
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Error durante la espera de 2 segundos antes de hacer clic en el botón 'Seleccionar mano'.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Seleccionar mano'.", e);
+        }
     }
+
 
 
     @When("hace click en el botón seleccionar día {string}")
@@ -2744,6 +2794,260 @@ public class Steps {
 
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Ver términos'.", e);
+        }
+    }
+    @Then("solicita contacto {string}")
+    public void solicitaContacto(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el botón esté presente
+            WebElement botonSolicitarContacto = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+
+            // Espera 2 segundos antes de intentar el clic
+            Thread.sleep(2000);
+
+            // Forzar el clic con JavaScript
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", botonSolicitarContacto);
+
+            System.out.println("Se ha hecho clic en 'Solicitar contacto' usando JavaScript.");
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Ocurrió un error durante la espera antes de hacer clic.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Solicitar contacto'.", e);
+        }
+    }
+
+
+    @Then("presiona soy administrador {string}")
+    public void presionaSoyAdministrador(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el botón identificado por el XPath sea clicable
+            WebElement botonSoyAdministrador = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Espera 3 segundos antes de hacer clic en el botón
+            Thread.sleep(3000);
+
+            // Haz clic en el botón
+            botonSoyAdministrador.click();
+            System.out.println("Se ha hecho clic en 'Soy Administrador' después de esperar 3 segundos.");
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Ocurrió un error durante la espera de 3 segundos antes de hacer clic.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Soy Administrador'.", e);
+        }
+    }
+    @Then("quiero unirme {string}")
+    public void quieroUnirme(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement botonQuieroUnirme = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el botón
+            botonQuieroUnirme.click();
+            System.out.println("Se ha hecho clic en 'Quiero unirme'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Quiero unirme'.", e);
+        }
+    }
+
+    @Then("presionar ver ranking {string}")
+    public void presionarVerRanking(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el botón identificado por el XPath sea clicable
+            WebElement botonVerRanking = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Espera 2 segundos antes de hacer clic
+            Thread.sleep(2000);
+
+            // Haz clic en el botón
+            botonVerRanking.click();
+            System.out.println("Se ha hecho clic en 'Ver Ranking' después de esperar 2 segundos.");
+
+        } catch (InterruptedException e) {
+            throw new RuntimeException("Ocurrió un error durante la espera de 2 segundos antes de hacer clic.", e);
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Ver Ranking'.", e);
+        }
+    }
+    @Given("al navegar hasta la url base {string}")
+    public void alNavegarHastaLaUrlBase(String urlBase) {
+        try {
+            // Navega a la URL base proporcionada
+            driver.get(urlBase);
+            System.out.println("Se ha navegado correctamente a la URL base: " + urlBase);
+
+            // Configura una espera explícita para verificar que la página haya cargado
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.urlToBe(urlBase));
+            System.out.println("La página base ha cargado correctamente.");
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al navegar a la URL base: " + urlBase, e);
+        }
+    }
+    @And("elegir apple store {string}")
+    public void elegirAppleStore(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement appleStoreLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace
+            appleStoreLink.click();
+            System.out.println("Se ha hecho clic en el enlace 'Apple Store'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Apple Store'.", e);
+        }
+    }
+    @And("elegir google play {string}")
+    public void elegirGooglePlay(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el enlace identificado por el XPath sea clicable
+            WebElement googlePlayLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace
+            googlePlayLink.click();
+            System.out.println("Se ha hecho clic en el enlace 'Google Play'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Google Play'.", e);
+        }
+    }
+    @And("elegir huawei store {string}")
+    public void elegirHuaweiStore(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el enlace identificado por el XPath sea clicable
+            WebElement huaweiStoreLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace
+            huaweiStoreLink.click();
+            System.out.println("Se ha hecho clic en el enlace 'Huawei Store'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Huawei Store'.", e);
+        }
+    }
+    @Then("seleccionar brasil {string}")
+    public void seleccionarBrasil(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement brasilLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace o imagen de Brasil
+            brasilLink.click();
+            System.out.println("Se ha hecho clic en el enlace o imagen de 'Brasil'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'Brasil'.", e);
+        }
+    }
+    @Then("elegir argentina {string}")
+    public void elegirArgentina(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement argentinaLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace o imagen de Argentina
+            argentinaLink.click();
+            System.out.println("Se ha hecho clic en el enlace o imagen de 'Argentina'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'Argentina'.", e);
+        }
+    }
+    @Then("elegir colombia {string}")
+    public void elegirColombia(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement colombiaLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace o imagen de Colombia
+            colombiaLink.click();
+            System.out.println("Se ha hecho clic en el enlace o imagen de 'Colombia'.");
+
+        } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'Colombia'.", e);
+        }
+    }
+    @Then("elegir peru {string}")
+    public void elegirPeru(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement peruLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace o imagen de Perú
+            peruLink.click();
+            System.out.println("Se ha hecho clic en el enlace o imagen de 'Perú'.");
+
+       } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'Perú'.", e);
+        }
+    }
+    @Then("elegir usa {string}")
+    public void elegirUsa(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement usaLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace o imagen de USA
+            usaLink.click();
+            System.out.println("Se ha hecho clic en el enlace o imagen de 'USA'.");
+
+      } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'USA'.", e);
+        }
+    }
+    @Then("elegir mexico {string}")
+    public void elegirMexico(String xpath) {
+        try {
+            // Configura una espera explícita de hasta 10 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement mexicoLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+
+            // Haz clic en el enlace o imagen de México
+            mexicoLink.click();
+            System.out.println("Se ha hecho clic en el enlace o imagen de 'México'.");
+
+       } catch (Exception e) {
+            throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'México'.", e);
         }
     }
 

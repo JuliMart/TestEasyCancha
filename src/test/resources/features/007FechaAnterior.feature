@@ -12,7 +12,7 @@ Feature: Reserva
 @tag3 
 	  Scenario: Fecha anterior deshabilitada
     Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"    
-		When hace click en el botón deporte "//div[contains(@class, 'col-xs-6 cardGutter pointer noselect') and @ng-click='chooseSports()']//h4[text()='Deportes']"
+		When hace click en el botón deporte '//*[@id="book-views"]/main/section[2]/div[1]/div[1]/div'
 		And hace click en el botón tenis "//div[contains(@class, 'col-xs-6 col-md-4 sports_items ng-scope')]//a[contains(@ng-click, 'selectSport') and .//div[contains(@class, 'sport_item_img')]]"
 		Then verificar que botón fecha anterior esté deshabilitado "//button[contains(@class, 'btn-slide') and contains(@ng-click, 'prev()')]"
 		

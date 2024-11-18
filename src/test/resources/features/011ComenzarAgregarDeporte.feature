@@ -11,6 +11,6 @@ Feature: Seleccion deporte
 @tag
 Scenario: Comenzar agregar deporte 
   Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
-  And hace click en el botón Match "//a[contains(@class, 'menu-icon') and @ng-click='clickGotoMatch()']//span[text()='Match']"
+  And hace click en el botón Match '//*[@id="book-views"]/main/section[2]/div[2]/div[2]/div'
   And presiona agrega un nuevo deporte '//*[@id="match"]/section[3]/div/div[2]/button'
   Then presiona boton comencemos '//*[@id="match"]/section[2]/div/div/div/a'

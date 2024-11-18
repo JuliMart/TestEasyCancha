@@ -1,5 +1,5 @@
 @tag
-Feature: Soporte y contacto 
+Feature: Perfil Usuario
 	Background: 
     Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
     And hacer click en el botón "//div[contains(@class, 'notification_need_login')]/div[contains(@class, 'row pointer')]"
@@ -9,8 +9,8 @@ Feature: Soporte y contacto
     Then presenta el mensaje de bienvenida "//div[contains(@class, 'user_welcome')]"
 
 @tag1	
-	Scenario: Contactar a soporte  
+	Scenario: Cambiar contrasena 
 		Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
 	#	And descartar prime "/html/body/div[1]/div/div/div/div[2]/a"
-		And presionar el icono de perfil del footer "//*[@id='main-footer']/div/a[4]"
-		Then solicita contacto '//*[@id="profile-views"]/main/section[3]/ul[4]/li[2]/a/span'
+		When hace click en el botón Match "//a[contains(@class, 'menu-icon') and @ng-click='clickGotoMatch()']//span[text()='Match']"
+		Then presionar ver ranking '//*[@id="match"]/section[3]/div/div[1]/div[3]/a[2]/i'

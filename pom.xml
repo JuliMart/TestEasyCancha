@@ -81,7 +81,7 @@
 		                        <goal>generate</goal>
 		                    </goals>
 		                    <configuration>
-		                        <projectName>Transferencia</projectName>
+		                        <projectName>TestEasy</projectName>
 		                        <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
 		                        <inputDirectory>${project.build.directory}</inputDirectory>
 		                        <jsonFiles>
