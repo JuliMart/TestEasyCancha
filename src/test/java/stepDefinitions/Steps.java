@@ -323,43 +323,26 @@ public class Steps {
         botonTenis.click(); // Hacer clic en el botón de tenis
     }
 
-    @When("selecciona club {string}")
-    public void selecciona_club(String xpathClub) {
+    @And("selecciona club {string}")
+    public void seleccionaClub(String clubXPath) {
         try {
-            // Esperar hasta que desaparezca el overlay de carga (si es visible)
-            Thread.sleep(2000); // Pequeña pausa para permitir que desaparezca el overlay de carga
+            // Configura una espera explícita de hasta 30 segundos
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-            // Encontrar el elemento del club
-            WebElement clubElement = driver.findElement(By.xpath(xpathClub));
+            // Espera a que el elemento identificado por el XPath sea clicable
+            WebElement botonClub = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(clubXPath)));
 
-            // Realizar scroll hacia el elemento
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", clubElement);
+            // Desplázate al botón (opcional) y espera 2 segundos
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", botonClub);
+            Thread.sleep(2000); // Espera 2 segundos adicionales antes de hacer clic
 
-            // Verificar si el elemento está habilitado antes de hacer clic
-            if (clubElement.isDisplayed() && clubElement.isEnabled()) {
-                // Intentar hacer clic con Selenium
-                try {
-                    clubElement.click();
-                    System.out.println("Elemento de club clicado exitosamente: " + xpathClub);
-                } catch (ElementClickInterceptedException e) {
-                    // Si el clic es interceptado, intentar hacer clic mediante JavaScript
-                    System.out.println("Elemento interceptado, intentando con JavaScript.");
-                    ((JavascriptExecutor) driver).executeScript("arguments[0].click();", clubElement);
-                }
-            } else {
-                System.err.println("Elemento del club no está visible o habilitado.");
-            }
-
-        } catch (NoSuchElementException e) {
-            System.err.println("Error: No se encontró el elemento del club con el xpath: " + xpathClub);
-            throw e;
+            // Haz clic en el botón
+            botonClub.click();
+            System.out.println("Se hizo clic en el botón 'Selecciona club' después de esperar 2 segundos.");
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            System.err.println("Error: Interrupción durante la espera.");
-            throw new RuntimeException("Error durante la espera: " + e.getMessage());
+            throw new RuntimeException("Error durante la espera de 2 segundos antes de hacer clic en el botón 'Selecciona club'.", e);
         } catch (Exception e) {
-            System.err.println("Error inesperado al intentar seleccionar el club: " + e.getMessage());
-            throw e;
+            throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Selecciona club'.", e);
         }
     }
 
