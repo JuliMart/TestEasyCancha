@@ -11,4 +11,4 @@ Feature: Perfil Usuario
 @tag1
 Scenario: Ver perfil 
 		Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
-		Then presionar el icono de perfil del footer  "//*[@id='main-footer']/div/a[4]"
+		And presionar el icono de perfil del footer "//*[@id='main-footer']/div/a[4]"

@@ -14,7 +14,7 @@ Feature: Busqueda de Rival
     	    Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
 					And hace click en el botón Match "//a[contains(@class, 'menu-icon') and @ng-click='clickGotoMatch()']//span[text()='Match']"
 					When hace click en el botón ajustes "//a[contains(@class, 'btn_dtl_profile')]//i[contains(@class, 'fa-gear')]"
-					And hace click en el botón editar deporte "//div[@class='sport_options']/a[@class='btn_editar_verde ng-binding']"
+					And hace click en el botón editar deporte '//*[@id="match"]/section[3]/div/div[5]/a'
 					And hace click en el botón seleccionar nivel "//div[@id='match-views']/div/main/section[2]/div[2]/div[2]/span[3]/button"
     			And hace click en el botón seleccionar mano "//div[@id='match-views']/div/main/section[2]/div[3]/div[2]/span[2]/button"
     			And hace click en el botón seleccionar día "//div[@id='match-views']/div/main/section[3]/div[2]/div[2]/span[2]/button"

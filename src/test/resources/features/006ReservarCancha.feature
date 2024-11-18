@@ -18,7 +18,7 @@ Feature: Reservas
 		And selecciona la hora "//div[contains(@class, 'hour_item') and normalize-space()='07:00']" y presiona "//a[contains(@class, 'btn-success') and contains(@class, 'btn-standar') and contains(text(), 'Siguiente')]"
 		And selecciona club '//*[@id="book-views"]/main/section[2]/div[10]/div[1]'
 		And selecciona disponibilidad "//div[@id='book-views']//div[contains(@class, 'hour-data pointer active') and .//span[text()='07:00']]"
-		And elige nro cancha '//*[@id="book-views"]//div[@class="hour-sub pointer flex-direction-column" and .//span[contains(text(), "Cancha 2")]]'
+		And elige nro cancha '//*[@id="book-views"]//div[@class="hour-sub pointer flex-direction-column" and .//span[contains(text(), "Cancha 3")]]'
 		And presiona el boton no quiero proteger a nadie "//div[@id='booking-insurance-modal']//button[contains(@class, 'insuranceButton') and .//h4[contains(text(), 'No quiero proteger a nadie')]]"
     And presionar el botón reservar y pagar "//button[contains(@class, 'reserva_btn_primary') and .//span[contains(text(), 'Reservar y pagar')]]"
 	  And presiona el boton agregar tarjeta de credito debito "//button[contains(@class, 'addCreditCardButton') and contains(text(), 'Agregar tarjeta de crédito / débito')]"

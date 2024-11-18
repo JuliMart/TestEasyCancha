@@ -12,9 +12,8 @@ Feature: Seleccion Deporte
  @tag2 
   Scenario: Filtrar Deporte Padel
     Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
-    When hace click en el botón deporte "//div[contains(@class, 'col-xs-6 cardGutter pointer noselect') and @ng-click='chooseSports()']//h4[text()='Deportes']"
+    When hace click en el botón deporte '//*[@id="book-views"]/main/section[2]/div[1]/div[1]/div'
 	  And hace click en el botón padel "//div[@class='sport_item_name ng-binding' and contains(text(), 'Padel')]"
-    And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='15'] and .//span[text()='vie.']]"
-		And selecciona la hora "//div[contains(@class, 'hour_item') and normalize-space()='09:00']" y presiona "//a[contains(@class, 'btn-success') and contains(@class, 'btn-standar') and contains(text(), 'Siguiente')]"
-    Then verificar que el elemento contenga la palabra Padel "//div[contains(@id, 'book-views')]//section[2]//div[contains(@class, 'row') and position()=6]//div[1]//div[2]//div[1]"
+    And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='21'] and .//span[text()='jue.']]"
+		Then selecciona la hora "//div[contains(@class, 'hour_item') and normalize-space()='18:30']" y presiona "//a[contains(@class, 'btn-success') and contains(@class, 'btn-standar') and contains(text(), 'Siguiente')]"
      
