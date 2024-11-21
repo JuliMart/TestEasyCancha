@@ -15,10 +15,10 @@ Feature: Seleccion Deporte
     Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
     When hace click en el botón deporte "//div[contains(@class, 'col-xs-6 cardGutter pointer noselect') and @ng-click='chooseSports()']//h4[text()='Deportes']"
 		And hace click en el botón padel "//div[@class='sport_item_name ng-binding' and contains(text(), 'Padel')]"
-    And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='21'] and .//span[text()='jue.']]"
+    And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='24'] and .//span[text()='dom.']]"
 		And selecciona la hora "//div[contains(@class, 'hour_item') and normalize-space()='09:00']" y presiona "//a[contains(@class, 'btn-success') and contains(@class, 'btn-standar') and contains(text(), 'Siguiente')]"
 		When presionar el botón volver dos veces "//nav[@id='main-header']//button[contains(@class, 'btn-link') and @ng-click='goBack()']"
 		And hace click en el botón tenis "//div[@class='sport_item_name ng-binding' and contains(text(), 'Tenis')]"
-		And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='21'] and .//span[text()='jue.']]"
+		And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='24'] and .//span[text()='dom.']]"
 		Then selecciona la hora "//div[contains(@class, 'hour_item') and normalize-space()='23:00']" y presiona "//a[contains(@class, 'btn-success') and contains(@class, 'btn-standar') and contains(text(), 'Siguiente')]"
     #Then verificar que el elemento contenga la palabra Tenis '//*[@id="book-views"]/main/section[2]/div[2]/div[1]/div[2]/div[contains(text(), "tenis") or contains(text(), "Tenis")]'

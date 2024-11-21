@@ -14,9 +14,10 @@ Feature: Perfil Usuario
 	#	And descartar prime "/html/body/div[1]/div/div/div/div[2]/a"
 		And presionar el icono de perfil del footer "//*[@id='main-footer']/div/a[4]"
 		And seleccionar cambiar contrasena "//*[@id='profile-views']/main/section[3]/ul[2]/li/a/span"
-		And coloca en el campo password "//*[@id='current_password']" el texto "GaelAlmendra2901"
 		#And coloca en el campo password "//*[@id='current_password']" el texto "Gael2901"
-		#And nueva contrasena '//*[@id="new_password"]' el texto "GaelAlmendra2901"
+		And coloca en el campo password "//*[@id='current_password']" el texto "GaelAlmendra2901"
 		And nueva contrasena '//*[@id="new_password"]' el texto "Gael2901"
+		#And nueva contrasena '//*[@id="new_password"]' el texto "GaelAlmendra2901"
 		And repite nuevo password '//*[@id="new_repeat_password"]' el texto "Gael2901"
+		#And repite nuevo password '//*[@id="new_repeat_password"]' el texto "GaelAlmendra2901"
 		Then confirma cambio password '//*[@id="profile-views"]/div[2]/form/div[4]/div[2]/button'
