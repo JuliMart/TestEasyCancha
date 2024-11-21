@@ -14,6 +14,6 @@ Feature: Seleccion Deporte
     Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
     When hace click en el botón deporte '//*[@id="book-views"]/main/section[2]/div[1]/div[1]/div'
 	  And hace click en el botón padel "//div[@class='sport_item_name ng-binding' and contains(text(), 'Padel')]"
-    And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='21'] and .//span[text()='jue.']]"
+    And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='24'] and .//span[text()='dom.']]"
 		Then selecciona la hora "//div[contains(@class, 'hour_item') and normalize-space()='18:30']" y presiona "//a[contains(@class, 'btn-success') and contains(@class, 'btn-standar') and contains(text(), 'Siguiente')]"
      

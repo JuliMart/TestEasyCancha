@@ -14,7 +14,7 @@ Feature: Reservas
     Given al navegar hasta la url "https://www.easycancha.com/book/search?lang=es-CL&country=CL"
 		When hace click en el botón deporte "//*[@id='book-views']/main/section[2]/div[1]/div[1]/div/h4"
 		And hace click en el botón tenis "//div[contains(@class, 'col-xs-6 col-md-4 sports_items ng-scope')]//a[contains(@ng-click, 'selectSport') and .//div[contains(@class, 'sport_item_img')]]"
-		And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='21'] and .//span[text()='jue.']]"
+		And hace click en el botón dia "//div[contains(@class, 'cds-day ng-scope') and .//span[text()='24'] and .//span[text()='dom.']]"
 		And selecciona la hora '//*[@id="book-views"]/main/section[3]/div[2]/div[1]' y presiona "//a[contains(@class, 'btn-success') and contains(@class, 'btn-standar') and contains(text(), 'Siguiente')]"
 		#And selecciona club '//*[@id="book-views"]/main/section[2]/div[2]/div[1]'
 		#And selecciona disponibilidad "//div[@id='book-views']//div[contains(@class, 'hour-data pointer active') and .//span[text()='07:00']]"

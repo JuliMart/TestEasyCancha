@@ -83,7 +83,11 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón.", e);
         }
-    }
+        
+        String obj = "hacer click en el botón"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+        }
+    
 
 
     @When("coloca en el campo usuario {string} el texto {string}")
@@ -206,7 +210,7 @@ public class Steps {
     }
     
     @Then("el boton ingresar debe estar deshabilitado {string}")
-    public void el_boton_ingresar_debe_estar_deshabilitado(String botonXPath) {
+    public void el_boton_ingresar_debe_estar_deshabilitado(String botonXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement boton = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(botonXPath))); // Esperar el botón
 
@@ -218,26 +222,36 @@ public class Steps {
         } else {
             System.out.println("El botón no está deshabilitado, lo que no es esperado."); // Mensaje de error
         }
+    
+    String obj = "el boton ingresar debe estar deshabilitado"; //nombre de la foto 
+    Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
     }
 
     // Métodos para la característica de Reserva
 
     @Given("al navegar hasta la url de reserva {string}")
-    public void al_navegar_hasta_la_url_de_reserva(String url) {
+    public void al_navegar_hasta_la_url_de_reserva(String url) throws IOException {
         driver.get(url); // Navegar a la URL de reserva
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='book-views']"))); // Esperar a que sea visible
+        String obj = "al navegar hasta la url de reserva"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+       
     }
 
     @When("hace click en el botón deporte {string}")
-    public void hace_click_en_el_boton_deporte(String deporteXPath) {
+    public void hace_click_en_el_boton_deporte(String deporteXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement botonDeporte = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(deporteXPath))); // Esperar botón de deporte
         botonDeporte.click(); // Hacer clic
+        String obj = "hace click en el botón deporte"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+       
+   
     }
 
     @When("hace click en el botón dia {string}")
-    public void hace_click_en_el_boton_dia(String diaXPath) {
+    public void hace_click_en_el_boton_dia(String diaXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         // Esperar hasta que desaparezca la superposición de carga
@@ -246,6 +260,9 @@ public class Steps {
         // Esperar a que el botón del día sea clicable
         WebElement botonDia = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(diaXPath)));
         botonDia.click(); // Hacer clic en el botón del día
+        String obj = "hace click en el botón dia"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+    
     }
 
     @When("selecciona la hora {string} y presiona {string}")
@@ -300,6 +317,7 @@ public class Steps {
         } catch (StaleElementReferenceException | org.openqa.selenium.TimeoutException e) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Continuar' después de múltiples intentos.");
         }
+        
     }
 
     @Then("presenta el mensaje {string}")
