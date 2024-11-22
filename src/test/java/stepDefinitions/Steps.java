@@ -243,11 +243,17 @@ public class Steps {
     public void hace_click_en_el_boton_deporte(String deporteXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement botonDeporte = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(deporteXPath))); // Esperar botón de deporte
+
+        try {
+            Thread.sleep(2000); // Esperar 2 segundos adicionales antes de hacer clic
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Error durante la espera antes de hacer clic en el botón de deporte.", e);
+        }
+
         botonDeporte.click(); // Hacer clic
         String obj = "hace click en el botón deporte"; //nombre de la foto 
         Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
-       
-   
     }
 
     @When("hace click en el botón dia {string}")
@@ -266,7 +272,7 @@ public class Steps {
     }
 
     @When("selecciona la hora {string} y presiona {string}")
-    public void selecciona_hora_y_presiona_siguiente(String horaXPath, String botonContinuarXPath) {
+    public void selecciona_hora_y_presiona_siguiente(String horaXPath, String botonContinuarXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -317,32 +323,54 @@ public class Steps {
         } catch (StaleElementReferenceException | org.openqa.selenium.TimeoutException e) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Continuar' después de múltiples intentos.");
         }
+        String obj = "selecciona la hora {string} y presiona {string}"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+    
+  
         
     }
 
     @Then("presenta el mensaje {string}")
-    public void presenta_el_mensaje(String mensaje) {
+    public void presenta_el_mensaje(String mensaje) throws IOException {
         // Este método puede implementarse para validar el mensaje esperado
         System.out.println("Mensaje de reserva: " + mensaje); // Imprimir mensaje de reserva
+        String obj = "presenta el mensaje"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+    
+  
     }
 
     // Método para apretar botón "Siguiente"
     @When("apretar boton {string}")
-    public void apretar_boton(String botonXPath) {
+    public void apretar_boton(String botonXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement boton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(botonXPath))); // Esperar a que el botón sea clicable
         boton.click(); // Hacer clic
+        String obj = "apretar boton"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+    
     }
 
     @When("hace click en el botón tenis {string}")
-    public void hace_click_en_el_boton_tenis(String tenisXPath) {
+    public void hace_click_en_el_boton_tenis(String tenisXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         WebElement botonTenis = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(tenisXPath))); // Esperar botón de tenis
+
+        try {
+            Thread.sleep(2000); // Esperar 2 segundos adicionales antes de hacer clic
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Error durante la espera antes de hacer clic en el botón de tenis.", e);
+        }
+
         botonTenis.click(); // Hacer clic en el botón de tenis
+        String obj = "hace click en el botón tenis"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
     }
 
+
     @And("selecciona club {string}")
-    public void seleccionaClub(String clubXPath) {
+    public void seleccionaClub(String clubXPath) throws IOException {
         try {
             // Configura una espera explícita de hasta 30 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -362,10 +390,13 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Selecciona club'.", e);
         }
+        String obj = "selecciona club"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
     @When("selecciona disponibilidad {string}")
-    public void seleccionaDisponibilidad(String xpathDisponibilidad) {
+    public void seleccionaDisponibilidad(String xpathDisponibilidad) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -405,10 +436,13 @@ public class Steps {
             System.err.println("Error inesperado al intentar seleccionar la disponibilidad: " + e.getMessage());
             throw e;
         }
+        String obj = "selecciona disponibilidad"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
     @When("elige nro cancha {string}")
-    public void seleccionaLaCancha(String xpathCancha) {
+    public void seleccionaLaCancha(String xpathCancha) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
@@ -437,10 +471,13 @@ public class Steps {
             System.err.println("Error inesperado al intentar seleccionar la cancha: " + e.getMessage());
             throw e;
         }
+        String obj = "elige nro cancha"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
     @When("presiona el boton no quiero proteger a nadie {string}")
-    public void presiona_el_boton_no_proteger_a_nadie(String xpathBoton) {
+    public void presiona_el_boton_no_proteger_a_nadie(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -484,10 +521,13 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'No quiero proteger a nadie' después de múltiples intentos.");
         }
+        String obj = "presiona el boton no quiero proteger a nadie"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
     @When("presionar el botón reservar y pagar {string}")
-    public void presionar_el_boton_reservar_y_pagar(String xpathBoton) {
+    public void presionar_el_boton_reservar_y_pagar(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -524,10 +564,14 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Reservar y pagar' después de múltiples intentos.");
         }
+        String obj = "presionar el botón reservar y pagar"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
+  
     }
 
     @When("presiona el boton agregar tarjeta de credito debito {string}")
-    public void presiona_el_boton_agregar_tarjeta(String xpathBoton) {
+    public void presiona_el_boton_agregar_tarjeta(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -564,10 +608,14 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Agregar tarjeta de crédito / débito' después de múltiples intentos.");
         }
+        String obj = "presiona el boton agregar tarjeta de credito debito"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
+  
     }
 
     @Then("verifica y selecciona la opción de no agregar tarjeta {string}")
-    public void verifica_selecciona_no_agregar_tarjeta(String xpathBoton) {
+    public void verifica_selecciona_no_agregar_tarjeta(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -603,10 +651,13 @@ public class Steps {
             System.err.println("Error inesperado al intentar seleccionar la opción de no agregar tarjeta: " + e.getMessage());
             throw e;
         }
+        String obj = "verifica y selecciona la opción de no agregar tarjeta"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
     @When("presionar el botón reservar y pagar más tarde {string}")
-    public void presionar_el_boton_reservar_y_pagar_mas_tarde(String xpathBoton) {
+    public void presionar_el_boton_reservar_y_pagar_mas_tarde(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -643,11 +694,15 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Reservar y pagar más tarde' después de múltiples intentos.");
         }
+        String obj = "presionar el botón reservar y pagar más tarde"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
+ 
     }
     
     
     @Then("verificar que botón fecha anterior esté deshabilitado {string}")
-    public void verificar_boton_fecha_anterior_esta_deshabilitado(String xpathBoton) throws TimeoutException {
+    public void verificar_boton_fecha_anterior_esta_deshabilitado(String xpathBoton) throws TimeoutException, IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
 
         // Esperar a que el botón esté visible
@@ -661,13 +716,16 @@ public class Steps {
 		} else {
 		    throw new AssertionError("El botón 'fecha anterior' no está deshabilitado como se esperaba.");
 		}
+	      String obj = "verificar que botón fecha anterior esté deshabilitado"; //nombre de la foto 
+	      Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	 
     }
 
     
     
     
     @When("presionar el botón reservas del footer {string}")
-    public void presionar_el_boton_reservas_footer(String xpathBoton) {
+    public void presionar_el_boton_reservas_footer(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -708,9 +766,13 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Reservas' del footer después de múltiples intentos.");
         }
+        String obj = "presionar el botón reservas del footer"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
+ 
     }
     @And("presionar boton pasadas {string}")
-    public void presionar_boton_pasadas(String pasadasButtonXPath) {
+    public void presionar_boton_pasadas(String pasadasButtonXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(90)); // Esperar hasta 90 segundos
             WebElement botonPasadas = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(pasadasButtonXPath))); // Esperar a que el botón esté clickeable
@@ -730,10 +792,13 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Pasadas': " + e.getMessage());
         }
+        String obj = "presionar boton pasadas"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
 @When("presionar el botón anular {string}")
-    public void presionar_el_boton_anular(String anularButtonXPath) {
+    public void presionar_el_boton_anular(String anularButtonXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
             WebElement botonAnular = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(anularButtonXPath))); // Esperar a que el botón "Anular" esté clickeable
@@ -753,11 +818,14 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Anular': " + e.getMessage());
         }
+        String obj = "presionar el botón anular"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
 
     @When("presionar el botón sí en el modal de confirmación {string}")
-    public void presionar_el_boton_si_en_modal(String xpathBoton) {
+    public void presionar_el_boton_si_en_modal(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -791,11 +859,15 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Sí' después de múltiples intentos.");
         }
+        String obj = "presionar el botón sí en el modal de confirmación"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
+ 
     }
 
 
     @When("presionar el botón ok en el mensaje de éxito {string}")
-    public void presionar_el_boton_ok_en_mensaje_exito(String xpathBoton) {
+    public void presionar_el_boton_ok_en_mensaje_exito(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -829,10 +901,13 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Ok' después de múltiples intentos.");
         }
+        String obj = "presionar el botón ok en el mensaje de éxito"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
     
     @Then("verificar que no tienes reservas activas {string}")
-    public void verificar_no_tienes_reservas_activas(String xpathMensaje) {
+    public void verificar_no_tienes_reservas_activas(String xpathMensaje) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
         try {
@@ -849,10 +924,13 @@ public class Steps {
         } catch (org.openqa.selenium.TimeoutException e) {
             throw new RuntimeException("No se pudo encontrar el mensaje 'No tienes reservas activas' después de esperar.");
         }
+        String obj = "verificar que no tienes reservas activas"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
     @When("presionar el icono de perfil del footer {string}")
-    public void presionar_el_icono_de_perfil_footer(String xpathBoton) {
+    public void presionar_el_icono_de_perfil_footer(String xpathBoton) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -886,10 +964,13 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Perfil' del footer después de múltiples intentos.");
         }
+        String obj = "presionar el icono de perfil del footer"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
 
     @Given("al navegar hasta la url1 {string}")
-    public void al_navegar_hasta_la_url1(String url) {
+    public void al_navegar_hasta_la_url1(String url) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(90));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -901,10 +982,13 @@ public class Steps {
 
         WebElement bookViewsElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='book-views']")));
 		System.out.println("Elemento 'book-views' está visible en la página.");
+	      String obj = "al navegar hasta la url1"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	 
     }
 
     @When("hace click en el botón padel {string}")
-    public void hace_click_en_el_boton_padel(String xpathOpcion) {
+    public void hace_click_en_el_boton_padel(String xpathOpcion) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -938,9 +1022,12 @@ public class Steps {
         if (!isClicked) {
             throw new RuntimeException("No se pudo hacer clic en el botón 'Golf' después de múltiples intentos.");
         }
+        String obj = "hace click en el botón padel"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
     @Then("verificar que el elemento contenga la palabra Padel {string}")
-    public void verificar_texto_contiene_padel(String xpathElemento) throws TimeoutException {
+    public void verificar_texto_contiene_padel(String xpathElemento) throws TimeoutException, IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -961,9 +1048,12 @@ public class Steps {
 		} else {
 		    throw new AssertionError("El elemento no contiene la palabra esperada ('Padel'): " + textoElemento);
 		}
+		String obj = "verificar que el elemento contenga la palabra Padel"; //nombre de la foto 
+        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+ 
     }
     @Then("verificar que aparezcan deportes para seleccionar {string}")
-    public void verificar_deportes_para_seleccionar(String xpathDeportes) throws TimeoutException {
+    public void verificar_deportes_para_seleccionar(String xpathDeportes) throws TimeoutException, IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -984,9 +1074,12 @@ public class Steps {
 		}
 
 		System.out.println("Deportes encontrados para seleccionar: " + deportes.size());
+		  String obj = "verificar que aparezcan deportes para seleccionar"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	 
     }
     @When("presionar el botón volver dos veces {string}")
-    public void presionar_el_boton_volver_dos_veces(String xpathBoton) throws TimeoutException {
+    public void presionar_el_boton_volver_dos_veces(String xpathBoton) throws TimeoutException, IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -1013,9 +1106,12 @@ public class Steps {
                 throw new RuntimeException("Error durante la espera del scroll", e);
             }
         }
+  	  String obj = "presionar el botón volver dos veces"; //nombre de la foto 
+      Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+
     }
     @Then("verificar que el elemento contenga la palabra Tenis {string}")
-    public void verificar_texto_contiene_tenis(String xpathElemento) throws TimeoutException {
+    public void verificar_texto_contiene_tenis(String xpathElemento) throws TimeoutException, IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(90));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -1036,11 +1132,14 @@ public class Steps {
 		} else {
 		    throw new AssertionError("El elemento no contiene la palabra esperada ('Tenis'): " + textoElemento);
 		}
+		  String obj = "verificar que el elemento contenga la palabra Tenis"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	 
     }
     
     
     @When("presiona el btnFooter {string}")
-    public void presiona_el_btn_footer(String btnFooterXPath) {
+    public void presiona_el_btn_footer(String btnFooterXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             WebElement btnFooter = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(btnFooterXPath))); // Esperar a que el botón del footer sea clicable
@@ -1049,19 +1148,25 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en el botón del footer con XPath: " + btnFooterXPath);
             throw e;
         }
+		  String obj = "presiona el btnFooter"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     
     @When("hace click en el botón Match {string}")
-    public void hace_click_en_el_boton_Match(String matchXPath) {
+    public void hace_click_en_el_boton_Match(String matchXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
         WebElement botonMatch = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(matchXPath))); // Esperar botón de Match
         botonMatch.click(); // Hacer clic en el botón "Match"
         System.out.println("Botón 'Match' seleccionado exitosamente: " + matchXPath);
+		  String obj = "hace click en el botón Match"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
 
     @Then("verificar rivales disponibles {string}")
-    public void verificar_rivales_disponibles(String xpathRivales) throws TimeoutException {
+    public void verificar_rivales_disponibles(String xpathRivales) throws TimeoutException, IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(90));
 
         // Esperar hasta que los rivales estén presentes en el DOM
@@ -1073,10 +1178,13 @@ public class Steps {
         } else {
             throw new AssertionError("No se encontraron rivales disponibles para desafiar.");
         }
+		  String obj = "verificar rivales disponibles"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     
     @When("hace click en el botón ajustes {string}")
-    public void hace_click_en_el_boton_ajustes(String ajustesXPath) {
+    public void hace_click_en_el_boton_ajustes(String ajustesXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
             WebElement botonAjustes = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ajustesXPath))); // Esperar hasta que el botón de ajustes sea clicable
@@ -1098,10 +1206,13 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Ajustes': " + e.getMessage());
         }
+		  String obj = "hace click en el botón ajustes"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @When("hace click en el botón editar deporte {string}")
-    public void hace_click_en_el_boton_editar_deporte(String editarXPath) {
+    public void hace_click_en_el_boton_editar_deporte(String editarXPath) throws IOException {
         try {
             // Configura una espera explícita de hasta 60 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -1120,11 +1231,14 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Editar deporte'.", e);
         }
+		  String obj = "hace click en el botón editar deporte"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
 
     @When("hace click en el botón seleccionar nivel {string}")
-    public void hace_click_en_el_boton_seleccionar_nivel(String nivelXPath) {
+    public void hace_click_en_el_boton_seleccionar_nivel(String nivelXPath) throws IOException {
         try {
             // Configura una espera explícita de hasta 60 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -1144,11 +1258,14 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Seleccionar nivel'.", e);
         }
+		  String obj = "hace click en el botón seleccionar nivel"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
 
     @When("hace click en el botón seleccionar mano {string}")
-    public void hace_click_en_el_boton_seleccionar_mano(String manoXPath) {
+    public void hace_click_en_el_boton_seleccionar_mano(String manoXPath) throws IOException {
         try {
             // Configura una espera explícita de hasta 60 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -1168,36 +1285,51 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Seleccionar mano'.", e);
         }
+		  String obj = "hace click en el botón seleccionar mano"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
 
 
     @When("hace click en el botón seleccionar día {string}")
-    public void hace_click_en_el_boton_seleccionar_dia(String diaXPath) {
+    public void hace_click_en_el_boton_seleccionar_dia(String diaXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         WebElement botonDia = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(diaXPath)));
         botonDia.click(); // Hacer clic en el botón "Seleccionar Día"
+		  String obj = "hace click en el botón seleccionar día"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @When("hace click en el botón seleccionar día JU")
-    public void hace_click_en_el_boton_seleccionar_dia_ju() {
+    public void hace_click_en_el_boton_seleccionar_dia_ju() throws IOException {
         String xpathDiaJU = "//button[contains(@class, 'btn_component_c') and contains(text(), 'JU')]";
         WebElement botonDiaJU = driver.findElement(By.xpath(xpathDiaJU));
         botonDiaJU.click(); // Hacer clic en el botón "JU"
+		  String obj = "hace click en el botón seleccionar día JU"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     
     @When("selecciona la hora de inicio {string}")
-    public void seleccionar_hora_inicio(String horaInicioXPath) {
+    public void seleccionar_hora_inicio(String horaInicioXPath) throws IOException {
         WebElement dropdownInicio = driver.findElement(By.xpath(horaInicioXPath));
         dropdownInicio.click(); // Seleccionar hora de inicio
+		  String obj = "selecciona la hora de inicio"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @When("selecciona la hora de término {string}")
-    public void seleccionar_hora_termino(String horaTerminoXPath) {
+    public void seleccionar_hora_termino(String horaTerminoXPath) throws IOException {
         WebElement dropdownTermino = driver.findElement(By.xpath(horaTerminoXPath));
         dropdownTermino.click(); // Seleccionar hora de término
+		  String obj = "selecciona la hora de término"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @When("selecciona la comuna {string}")
-    public void selecciona_la_comuna(String comunaXPath) {
+    public void selecciona_la_comuna(String comunaXPath) throws IOException {
         try {
             // Buscar el elemento con el XPath proporcionado
             WebElement comuna = driver.findElement(By.xpath(comunaXPath));
@@ -1212,12 +1344,15 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar seleccionar la comuna: " + e.getMessage());
         }
+		  String obj = "selecciona la comuna"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
 
     
     @When("ingresa la comuna {string} en el campo de comuna {string}")
-    public void ingresa_comuna(String comuna, String comunaXPath) {
+    public void ingresa_comuna(String comuna, String comunaXPath) throws IOException {
         try {
             // Buscar el campo de entrada de la comuna con el XPath proporcionado
             WebElement campoComuna = driver.findElement(By.xpath(comunaXPath));
@@ -1234,9 +1369,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar ingresar la comuna: " + e.getMessage());
         }
+		  String obj = "ingresa la comuna {string} en el campo de comuna {string}"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @When("selecciona la comuna de la lista {string}")
-    public void selecciona_la_comuna_de_la_lista(String comunaXPath) {
+    public void selecciona_la_comuna_de_la_lista(String comunaXPath) throws IOException {
         try {
             // Esperar a que el elemento esté presente y visible en el DOM
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -1251,9 +1389,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar seleccionar la comuna de la lista: " + e.getMessage());
         }
+		  String obj = "selecciona la comuna de la lista"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @When("hace click en el botón siguiente {string}")
-    public void hace_click_en_el_boton_siguiente(String siguienteXPath) {
+    public void hace_click_en_el_boton_siguiente(String siguienteXPath) throws IOException {
         try {
             // Buscar el elemento con el XPath proporcionado
             WebElement botonSiguiente = driver.findElement(By.xpath(siguienteXPath));
@@ -1285,9 +1426,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Siguiente': " + e.getMessage());
         }
+		  String obj = "hace click en el botón siguiente"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @When("hace click en el boton hombre {string}")
-    public void hace_click_en_el_boton_hombre(String hombreXPath) {
+    public void hace_click_en_el_boton_hombre(String hombreXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
             WebElement botonHombre = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(hombreXPath))); // Esperar hasta que el botón "Hombre" sea clicable
@@ -1307,10 +1451,13 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Hombre': " + e.getMessage());
         }
+		  String obj = "hace click en el boton hombre"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @When("hace click en el botón rango {string}")
-    public void hace_click_en_el_boton_rango(String rangoXPath) {
+    public void hace_click_en_el_boton_rango(String rangoXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
             WebElement botonRango = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(rangoXPath))); // Esperar hasta que el botón sea clicable
@@ -1330,10 +1477,13 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón de rango: " + e.getMessage());
         }
+		  String obj = "hace click en el botón rango"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @When("hace click en el botón estilo de juego {string}")
-    public void hace_click_en_el_boton_estilo_de_juego(String estiloJuegoXPath) {
+    public void hace_click_en_el_boton_estilo_de_juego(String estiloJuegoXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
 
@@ -1358,9 +1508,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Estilo de juego': " + e.getMessage());
         }
+		  String obj = "hace click en el botón estilo de juego"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @When("hace click en el botón mano {string}")
-    public void hace_click_en_el_boton_mano(String manoXPath) {
+    public void hace_click_en_el_boton_mano(String manoXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
 
@@ -1385,9 +1538,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Mano': " + e.getMessage());
         }
+		  String obj = "hace click en el botón mano"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("hace click en el botón terminar perfil {string}")
-    public void hace_click_en_el_boton_terminar_perfil(String terminarPerfilXPath) {
+    public void hace_click_en_el_boton_terminar_perfil(String terminarPerfilXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
 
@@ -1412,9 +1568,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Terminar perfil': " + e.getMessage());
         }
+		  String obj = "hace click en el botón terminar perfil"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("verifica mensaje {string}")
-    public void verifica_mensaje(String mensajeXPath) {
+    public void verifica_mensaje(String mensajeXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Esperar hasta 30 segundos
             WebElement mensajeElemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(mensajeXPath))); // Esperar a que el elemento esté visible
@@ -1428,9 +1587,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al verificar el mensaje de éxito: " + e.getMessage());
         }
+		  String obj = "verifica mensaje"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("presiona botón ok {string}")
-    public void presiona_boton_ok(String okButtonXPath) {
+    public void presiona_boton_ok(String okButtonXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Esperar hasta 30 segundos
             WebElement botonOk = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(okButtonXPath))); // Esperar a que el botón "OK" sea clickeable
@@ -1450,9 +1612,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'OK': " + e.getMessage());
         }
+		  String obj = "presiona botón ok"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("presiona botón desafiar {string}")
-    public void presiona_boton_desafiar(String desafiarButtonXPath) {
+    public void presiona_boton_desafiar(String desafiarButtonXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Esperar hasta 30 segundos
             WebElement botonDesafiar = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(desafiarButtonXPath))); // Esperar a que el botón "Desafiar" sea clickeable
@@ -1472,9 +1637,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Desafiar': " + e.getMessage());
         }
+		  String obj = "presiona botón desafiar"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("elige hora de desafio {string}")
-    public void elige_hora_de_desafio(String horaDesafioXPath) {
+    public void elige_hora_de_desafio(String horaDesafioXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
             WebElement horaDesafio = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(horaDesafioXPath))); // Esperar a que el elemento esté visible
@@ -1494,9 +1662,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar seleccionar la hora de desafío: " + e.getMessage());
         }
+		  String obj = "elige hora de desafio"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("presiona confirmacion {string}")
-    public void presiona_confirmacion(String confirmacionButtonXPath) {
+    public void presiona_confirmacion(String confirmacionButtonXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
             WebElement botonConfirmacion = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(confirmacionButtonXPath))); // Esperar a que el botón de confirmación sea clickeable
@@ -1516,9 +1687,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón de confirmación: " + e.getMessage());
         }
+		  String obj = "presiona confirmacion"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("mensaje confirma desafio {string}")
-    public void mensaje_confirma_desafio(String mensajeXPath) throws TimeoutException {
+    public void mensaje_confirma_desafio(String mensajeXPath) throws TimeoutException, IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Esperar hasta 30 segundos
             WebElement mensajeElemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(mensajeXPath))); // Esperar a que el pop-up esté visible
@@ -1534,10 +1708,13 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al verificar el mensaje de confirmación de desafío: " + e.getMessage());
         }
+		  String obj = "mensaje confirma desafio"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @And("presiona botón desafiar a {string}")
-    public void presiona_boton_desafiar_a(String desafiarAXPath) {
+    public void presiona_boton_desafiar_a(String desafiarAXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Esperar hasta 30 segundos
             WebElement botonDesafiarA = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(desafiarAXPath))); // Esperar a que el botón "Desafiar a" sea clickeable
@@ -1557,9 +1734,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Desafiar a': " + e.getMessage());
         }
+		  String obj = "presiona botón desafiar a"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("presiona anular {string}")
-    public void presiona_anular(String anularButtonXPath) {
+    public void presiona_anular(String anularButtonXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
             WebElement botonAnular = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(anularButtonXPath))); // Esperar a que el botón "Anular" sea clickeable
@@ -1579,9 +1759,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón 'Anular': " + e.getMessage());
         }
+		  String obj = "presiona anular"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("confirma anulacion {string}")
-    public void confirma_anulacion(String confirmacionAnulacionXPath) {
+    public void confirma_anulacion(String confirmacionAnulacionXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60)); // Esperar hasta 60 segundos
             WebElement botonConfirmarAnulacion = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(confirmacionAnulacionXPath))); // Esperar a que el botón de confirmación de anulación sea clickeable
@@ -1601,9 +1784,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al intentar hacer clic en el botón de confirmación de anulación: " + e.getMessage());
         }
+		  String obj = "confirma anulacion"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("ver mis reservas {string}")
-    public void ver_mis_reservas(String reservasXPath) {
+    public void ver_mis_reservas(String reservasXPath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); // Esperar hasta 30 segundos
             WebElement reservasElemento = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(reservasXPath))); // Esperar a que el elemento esté visible
@@ -1619,9 +1805,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Error al verificar el texto 'Mis reservas': " + e.getMessage());
         }
+		  String obj = "ver mis reservas"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("presiona en reservas pasadas {string}")
-    public void presiona_en_reservas_pasadas(String reservasPasadasXPath) {
+    public void presiona_en_reservas_pasadas(String reservasPasadasXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             WebElement botonReservasPasadas = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(reservasPasadasXPath))); // Esperar a que el botón de reservas pasadas sea clicable
@@ -1630,9 +1819,12 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en el botón de reservas pasadas con XPath: " + reservasPasadasXPath);
             throw e;
         }
+		  String obj = "presiona en reservas pasadas"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("selecciona mes reserva {string}")
-    public void selecciona_mes_reserva(String mesXPath) {
+    public void selecciona_mes_reserva(String mesXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             WebElement mesSelectElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(mesXPath)));
@@ -1642,9 +1834,12 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo seleccionar el mes con XPath: " + mesXPath);
             throw e;
         }
+		  String obj = "selecciona mes reserva"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("selecciona año reserva {string}")
-    public void selecciona_año_reserva(String añoXPath) {
+    public void selecciona_año_reserva(String añoXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             WebElement añoSelectElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(añoXPath)));
@@ -1654,9 +1849,12 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo seleccionar el año con XPath: " + añoXPath);
             throw e;
         }
+		  String obj = "selecciona año reserva"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("presionar botón clubes {string}")
-    public void presionar_boton_clubes(String botonClubesXPath) {
+    public void presionar_boton_clubes(String botonClubesXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             WebElement botonClubes = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(botonClubesXPath))); // Esperar a que el botón de clubes sea clicable
@@ -1665,9 +1863,12 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en el botón de clubes con XPath: " + botonClubesXPath);
             throw e;
         }
+		  String obj = "presionar botón clubes"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("presionar filtro club {string}")
-    public void presionar_filtro_club(String filtroClubXPath) {
+    public void presionar_filtro_club(String filtroClubXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             WebElement botonFiltroClub = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(filtroClubXPath))); // Esperar a que el botón de filtro de club sea clicable
@@ -1676,10 +1877,13 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en el botón de filtro de club con XPath: " + filtroClubXPath);
             throw e;
         }
+		  String obj = "presionar filtro club"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @When("elegir comunas {string}")
-    public void elegir_comunas(String comunaXPath) {
+    public void elegir_comunas(String comunaXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar a que el elemento que represente la comuna esté clicable
@@ -1691,10 +1895,13 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en el elemento de la comuna con XPath: " + comunaXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "elegir comunas"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @Then("elegir actividad {string}")
-    public void elegir_actividad(String actividadXPath) {
+    public void elegir_actividad(String actividadXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar a que el elemento de actividad sea clicable
@@ -1706,9 +1913,12 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en el elemento de la actividad con XPath: " + actividadXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "elegir actividad"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("desplegar {string}")
-    public void desplegar(String opcionXPath) {
+    public void desplegar(String opcionXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar a que el elemento del desplegable sea clicable
@@ -1720,9 +1930,12 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en la opción del desplegable con XPath: " + opcionXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "desplegar"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("aplicar filtros {string}")
-    public void aplicar_filtros(String botonFiltrosXPath) {
+    public void aplicar_filtros(String botonFiltrosXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar a que el botón de aplicar filtros sea clicable
@@ -1734,9 +1947,12 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en el botón de aplicar filtros con XPath: " + botonFiltrosXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "aplicar filtros"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("editar datos personales {string}")
-    public void editar_datos_personales(String editarDatosXPath) {
+    public void editar_datos_personales(String editarDatosXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar hasta que el overlay de carga desaparezca
@@ -1754,9 +1970,12 @@ public class Steps {
             System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace de editar datos personales con XPath: " + editarDatosXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "editar datos personales"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("descartar prime {string}")
-    public void descartar_prime(String descartarPrimeXPath) {
+    public void descartar_prime(String descartarPrimeXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar a que el elemento de descartar prime sea clicable
@@ -1768,9 +1987,12 @@ public class Steps {
             System.err.println("TimeoutException: No se pudo hacer clic en el enlace para descartar prime con XPath: " + descartarPrimeXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "descartar prime"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("ver lista amigos {string}")
-    public void ver_lista_amigos(String verListaAmigosXPath) {
+    public void ver_lista_amigos(String verListaAmigosXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar hasta que el overlay de carga desaparezca
@@ -1788,9 +2010,12 @@ public class Steps {
             System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace de editar datos personales con XPath: " + verListaAmigosXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "ver lista amigos"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("btn tarjetas {string}")
-    public void btn_tarjetas(String btnTarjetasXPath) {
+    public void btn_tarjetas(String btnTarjetasXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar hasta que el overlay de carga desaparezca (si existe)
@@ -1814,9 +2039,12 @@ public class Steps {
             System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el botón de tarjetas con XPath: " + btnTarjetasXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "btn tarjetas"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("seleccionar pais {string}")
-    public void seleccionar_pais(String seleccionarPaisXPath) {
+    public void seleccionar_pais(String seleccionarPaisXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar hasta que el overlay de carga desaparezca (si existe)
@@ -1840,9 +2068,12 @@ public class Steps {
             System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace para seleccionar país con XPath: " + seleccionarPaisXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "seleccionar pais"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("elegir pais para utilizar la app {string}")
-    public void elegir_pais_para_utilizar_la_app(String elegirPaisXPath) {
+    public void elegir_pais_para_utilizar_la_app(String elegirPaisXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar hasta que el overlay de carga desaparezca (si existe)
@@ -1866,9 +2097,12 @@ public class Steps {
             System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace para elegir país con XPath: " + elegirPaisXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "elegir pais para utilizar la app"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("seleccionar idioma {string}")
-    public void seleccionar_idioma(String seleccionarIdiomaXPath) {
+    public void seleccionar_idioma(String seleccionarIdiomaXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar hasta que el overlay de carga desaparezca (si existe)
@@ -1892,9 +2126,12 @@ public class Steps {
             System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace para seleccionar idioma con XPath: " + seleccionarIdiomaXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "seleccionar idioma"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("seleccionar ingles {string}")
-    public void seleccionar_ingles(String seleccionarInglesXPath) {
+    public void seleccionar_ingles(String seleccionarInglesXPath) throws IOException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             // Esperar hasta que el overlay de carga desaparezca (si existe)
@@ -1918,6 +2155,9 @@ public class Steps {
             System.err.println("ElementClickInterceptedException: Otro elemento estaba bloqueando el clic en el enlace para seleccionar inglés con XPath: " + seleccionarInglesXPath);
             throw e; // Lanzar la excepción para manejar el fallo adecuadamente
         }
+		  String obj = "seleccionar ingles"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("seleccionar cambiar contrasena {string}")
     public void seleccionar_cambiar_contrasena(String cambiarContrasenaXPath) throws IOException {
@@ -1949,6 +2189,7 @@ public class Steps {
             } catch (Exception e) {
                 throw new RuntimeException("Error al intentar hacer clic en el botón cambiar contraseña: " + e.getMessage());
             }
+            
         }
 
         // Si después de varios intentos no se pudo hacer clic, lanzar excepción
@@ -2628,7 +2869,7 @@ public class Steps {
         Utility.captureScreenShot(driver, "evidencias\\" + obj + " " + Utility.GetTimeStampValue() + ".png");
     }
     @Then("ver semana siguiente {string}")
-    public void verSemanaSiguiente(String xpath) {
+    public void verSemanaSiguiente(String xpath) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
@@ -2645,9 +2886,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'ver semana siguiente'.", e);
         }
+		  String obj = "ver semana siguiente"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("click en clases y escuelas {string}")
-    public void clickEnClasesYEscuelas(String xpath) {
+    public void clickEnClasesYEscuelas(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2662,9 +2906,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el elemento 'clases y escuelas'.", e);
         }
+		  String obj = "click en clases y escuelas"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("seleccionar escuela {string}")
-    public void seleccionarEscuela(String xpath) {
+    public void seleccionarEscuela(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2679,9 +2926,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el elemento 'seleccionar escuela'.", e);
         }
+		  String obj = "seleccionar escuela"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("elige quiero mes gratis {string}")
-    public void eligeQuieroMesGratis(String xpath) {
+    public void eligeQuieroMesGratis(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2696,9 +2946,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Quiero mes gratis'.", e);
         }
+		  String obj = "elige quiero mes gratis"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("suscribir a prime {string}")
-    public void suscribirAPrime(String xpath) {
+    public void suscribirAPrime(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2713,9 +2966,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Suscribir a Prime'.", e);
         }
+		  String obj = "suscribir a prime"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("agregar tarjeta nueva {string}")
-    public void agregarTarjetaNueva(String xpath) {
+    public void agregarTarjetaNueva(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2730,10 +2986,13 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Agregar tarjeta nueva'.", e);
         }
+		  String obj = "agregar tarjeta nueva"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @When("agrega numero tarjeta {string} el texto {string}")
-    public void agregaNumeroTarjeta(String xpath, String texto) {
+    public void agregaNumeroTarjeta(String xpath, String texto) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement campoNumeroTarjeta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
@@ -2743,9 +3002,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al ingresar el número de tarjeta.", e);
         }
+		  String obj = "agrega numero tarjeta {string} el texto {string}"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("nombre tarjeta {string} el texto {string}")
-    public void nombreTarjeta(String xpath, String texto) {
+    public void nombreTarjeta(String xpath, String texto) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement campoNombreTarjeta = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
@@ -2755,9 +3017,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al ingresar el nombre en la tarjeta.", e);
         }
+		  String obj = "nombre tarjeta {string} el texto {string}"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("fecha expiracion {string} el texto {string}")
-    public void fechaExpiracion(String xpath, String texto) {
+    public void fechaExpiracion(String xpath, String texto) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement campoFechaExpiracion = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
@@ -2767,9 +3032,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al ingresar la fecha de expiración.", e);
         }
+		  String obj = "fecha expiracion {string} el texto {string}"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("cvv {string} el texto {string}")
-    public void cvv(String xpath, String texto) {
+    public void cvv(String xpath, String texto) throws IOException {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             WebElement campoCVV = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
@@ -2779,9 +3047,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al ingresar el CVV.", e);
         }
+		  String obj = "cvv {string} el texto {string}"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("presiona agregar tarjeta {string}")
-    public void presionaAgregarTarjeta(String xpath) {
+    public void presionaAgregarTarjeta(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2796,9 +3067,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Agregar tarjeta'.", e);
         }
+		  String obj = "presiona agregar tarjeta"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("hace click en ver terminos {string}")
-    public void haceClickEnVerTerminos(String xpath) {
+    public void haceClickEnVerTerminos(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2813,9 +3087,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Ver términos'.", e);
         }
+		  String obj = "hace click en ver terminos"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("solicita contacto {string}")
-    public void solicitaContacto(String xpath) {
+    public void solicitaContacto(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2835,11 +3112,14 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Solicitar contacto'.", e);
         }
+		  String obj = "solicita contacto"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
 
     @Then("presiona soy administrador {string}")
-    public void presionaSoyAdministrador(String xpath) {
+    public void presionaSoyAdministrador(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2859,9 +3139,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Soy Administrador'.", e);
         }
+		  String obj = "presiona soy administrador"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("quiero unirme {string}")
-    public void quieroUnirme(String xpath) {
+    public void quieroUnirme(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2876,10 +3159,13 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Quiero unirme'.", e);
         }
+		  String obj = "quiero unirme"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
     @Then("presionar ver ranking {string}")
-    public void presionarVerRanking(String xpath) {
+    public void presionarVerRanking(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2899,9 +3185,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el botón 'Ver Ranking'.", e);
         }
+		  String obj = "presionar ver ranking"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Given("al navegar hasta la url base {string}")
-    public void alNavegarHastaLaUrlBase(String urlBase) {
+    public void alNavegarHastaLaUrlBase(String urlBase) throws IOException {
         try {
             // Navega a la URL base proporcionada
             driver.get(urlBase);
@@ -2914,9 +3203,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al navegar a la URL base: " + urlBase, e);
         }
+		  String obj = "al navegar hasta la url base"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("elegir apple store {string}")
-    public void elegirAppleStore(String xpath) {
+    public void elegirAppleStore(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2931,9 +3223,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Apple Store'.", e);
         }
+		  String obj = "elegir apple store"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("elegir google play {string}")
-    public void elegirGooglePlay(String xpath) {
+    public void elegirGooglePlay(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2948,9 +3243,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Google Play'.", e);
         }
+		  String obj = "elegir google play"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @And("elegir huawei store {string}")
-    public void elegirHuaweiStore(String xpath) {
+    public void elegirHuaweiStore(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2965,9 +3263,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace 'Huawei Store'.", e);
         }
+		  String obj = "elegir huawei store"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("seleccionar brasil {string}")
-    public void seleccionarBrasil(String xpath) {
+    public void seleccionarBrasil(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2982,9 +3283,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'Brasil'.", e);
         }
+		  String obj = "seleccionar brasils"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("elegir argentina {string}")
-    public void elegirArgentina(String xpath) {
+    public void elegirArgentina(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -2999,9 +3303,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'Argentina'.", e);
         }
+		  String obj = "elegir argentina"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("elegir colombia {string}")
-    public void elegirColombia(String xpath) {
+    public void elegirColombia(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -3016,9 +3323,12 @@ public class Steps {
         } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'Colombia'.", e);
         }
+		  String obj = "elegir colombia"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("elegir peru {string}")
-    public void elegirPeru(String xpath) {
+    public void elegirPeru(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -3033,9 +3343,12 @@ public class Steps {
        } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'Perú'.", e);
         }
+		  String obj = "elegir peru"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("elegir usa {string}")
-    public void elegirUsa(String xpath) {
+    public void elegirUsa(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -3050,9 +3363,12 @@ public class Steps {
       } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'USA'.", e);
         }
+		  String obj = "verificar que el elemento contenga la palabra Tenis"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
     @Then("elegir mexico {string}")
-    public void elegirMexico(String xpath) {
+    public void elegirMexico(String xpath) throws IOException {
         try {
             // Configura una espera explícita de hasta 10 segundos
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -3067,6 +3383,9 @@ public class Steps {
        } catch (Exception e) {
             throw new RuntimeException("Ocurrió un error al interactuar con el enlace o imagen de 'México'.", e);
         }
+		  String obj = "elegir mexico"; //nombre de la foto 
+	        Utility.captureScreenShot(driver,"evidencias\\"+obj+" "+Utility.GetTimeStampValue()+".png");
+	
     }
 
 }
